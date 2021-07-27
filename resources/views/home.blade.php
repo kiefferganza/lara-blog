@@ -4,19 +4,24 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
+            <div class="text-right pb-3">
+                <a class="btn btn-info text-white" href="{{ route('posts.create') }}">Create Posts</a>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    Posts Here
-                </div>
             </div>
+            @foreach($posts as $post)
+                <div class="pb-3">
+                    <div class="card">
+                        <p class="pl-2"><b>{{ $post->user->name }}</b></p>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ $post->title }}</h5>
+                            <p class="card-text">{{ $post->body }}</p>
+                            <p class="card-text"><small class="text-muted">{{ $post->created_at }}</small></p>
+                        </div>
+
+                    </div>
+                </div>
+
+            @endforeach
         </div>
     </div>
 </div>
