@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -19,10 +20,19 @@ class HomeController extends Controller
     /**
      * Show the application dashboard.
      *
-     * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
     {
-        return view('home');
+        $posts = Post::orderBy("created_at",'desc')->get();
+        return view('home', compact(
+            'posts'
+        ));
     }
+
+    public function create()
+    {
+        return view('posts.create');
+    }
+
+
 }
