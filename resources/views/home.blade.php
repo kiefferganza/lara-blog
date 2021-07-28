@@ -11,13 +11,14 @@
             @foreach($posts as $post)
                 <div class="pb-3">
                     <div class="card">
-                        <p class="pl-2"><b>{{ $post->user->name }}</b></p>
+                        <p class="pl-2"><b></b></p>
                         <div class="card-body">
                             <h5 class="card-title">{{ $post->title }}</h5>
                             <p class="card-text">{{ $post->body }}</p>
-                            <p class="card-text"><small class="text-muted">{{ $post->created_at }}</small></p>
+                            <p class="card-text">
+                                <small class="text-muted">Created by {{ $post->user->name }} on {{ date('jS M Y', strtotime($post->created_at)) }}</small>
+                            </p>
                         </div>
-
                     </div>
                 </div>
 

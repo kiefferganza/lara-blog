@@ -11,8 +11,12 @@ class PostController extends Controller
 {
     public function index()
     {
+        $user = Auth::id();
+        $posts = Post::where('user_id', $user)->get();
 
-        return view('posts.index');
+        return view('posts.index',compact(
+            'posts'
+        ));
     }
 
     public function create()
@@ -36,5 +40,30 @@ class PostController extends Controller
 
         return redirect()->route('home');
 
+    }
+
+    public function show($id)
+    {
+
+    }
+
+    public function edit($id)
+    {
+        $post = Post::where('id', $id)->get();
+
+        return response()->json(compact('post'));
+    }
+
+    public function update(PostRequest $request, $id)
+    {
+        $post = Post::find($id);
+        
+        $post->title = $request->postTitle;
+        
+        $post->body = $request->postBody;
+
+        $post->save();
+
+        return redirect()->route('posts.index');
     }
 }
